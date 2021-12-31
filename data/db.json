@@ -1,10 +1,16 @@
 {
-    "notes":[
-        {
-            "id":1,
-            "title":"Yoshi's birthday bash",
-            "details":"It's going to be a very cool party",
-            "category":"reminders"
-        }
-    ]
+  "notes": [
+    {
+      "id": 1,
+      "title": "Yoshi's birthday bash",
+      "details": "It's going to be a very cool party",
+      "category": "reminders"
+    },
+    {
+      "title": "Football",
+      "details": "We need to play football as soon as possible",
+      "category": "todos",
+      "id": 2
+    }
+  ]
 }

@@ -2,6 +2,7 @@ import { Button, Container, Typography, makeStyles, TextField, Radio, RadioGroup
 import SendIcon from '@material-ui/icons/Send';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import React, { useState } from 'react'
+import { useHistory } from 'react-router';
 
 const useStyles = makeStyles({
   field:{
@@ -13,6 +14,7 @@ const useStyles = makeStyles({
 
 export default function Create() {
   const classes = useStyles();
+  const history = useHistory();
 
   const [formValues, setFormValues] = useState({
     title:{
@@ -60,8 +62,17 @@ export default function Create() {
         }
       })
     }else{
-      const {title, details} = fieldValues;
-      console.log({title, details});
+      const {title, details, category} = formValues
+      fetch('http://localhost:8000/notes', {
+        method:'POST',
+        headers:{'Content-type':"application/json"},
+        body:JSON.stringify({
+          title:title.value,
+          details:details.value,
+          category:category.value
+        })
+      })
+      .then(() => history.push('/'))
     }
   }
 
