@@ -1,4 +1,4 @@
-import { Button, Container, Typography, makeStyles, TextField } from '@material-ui/core'
+import { Button, Container, Typography, makeStyles, TextField, Radio, RadioGroup, FormControlLabel, FormLabel, FormControl } from '@material-ui/core'
 import SendIcon from '@material-ui/icons/Send';
 import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
 import React, { useState } from 'react'
@@ -22,10 +22,12 @@ export default function Create() {
     details:{
       value:'',
       error:false
+    },
+    category:{
+      value:'money',
+      error:false
     }
   })
-
-  console.log({formValues});
 
   const handleChange = (e) => {
     const value = e.target.value;
@@ -102,6 +104,16 @@ export default function Create() {
           required
           name="details"
         />
+
+        <FormControl className={classes.field} >
+          <FormLabel>Note category</FormLabel>
+          <RadioGroup name="category" value={formValues.category.value} onChange={handleChange} >
+            <FormControlLabel value="money" control={<Radio />} label="Money" />
+            <FormControlLabel value="todos" control={<Radio />} label="Todos" />
+            <FormControlLabel value="reminders" control={<Radio />} label="Reminders" />
+            <FormControlLabel value="work" control={<Radio />} label="Work" />
+          </RadioGroup>
+        </FormControl>
 
         <Button
           type="submit"
