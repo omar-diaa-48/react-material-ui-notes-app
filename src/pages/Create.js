@@ -14,26 +14,51 @@ const useStyles = makeStyles({
 export default function Create() {
   const classes = useStyles();
 
-  const [form, setForm] = useState({
-    title:'',
-    details:''
+  const [formValues, setFormValues] = useState({
+    title:{
+      value:'',
+      error:false
+    },
+    details:{
+      value:'',
+      error:false
+    }
   })
+
+  console.log({formValues});
 
   const handleChange = (e) => {
     const value = e.target.value;
     const field = e.target.name;
 
-    setForm({
-      ...form,
-      [field]:value
+    setFormValues({
+      ...formValues,
+      [field]:{
+        ...formValues[field],
+        value
+      }
     })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const {title, details} = form;
-    if(title && details){
+    const fieldKeys = Object.keys(formValues)
+    const fieldValues = fieldKeys.map(field => formValues[field].value);
+    if(fieldValues.some(fieldValue => fieldValue === '')){
+      fieldKeys.forEach(fieldKey => {
+        if(formValues[fieldKey]['value'] === ''){
+          setFormValues({
+            ...formValues,
+            [fieldKey]:{
+              ...formValues[fieldKey],
+              error:true
+            }
+          })
+        }
+      })
+    }else{
+      const {title, details} = fieldValues;
       console.log({title, details});
     }
   }
@@ -52,6 +77,8 @@ export default function Create() {
       <form noValidate autoComplete="off" onSubmit={handleSubmit}>
         <TextField
           onChange={handleChange}
+          value={formValues.title.value}
+          error={formValues.title.error}
           className={classes.field}
           color="secondary"
           label="Node title"
@@ -63,6 +90,8 @@ export default function Create() {
 
         <TextField
           onChange={handleChange}
+          value={formValues.details.value}
+          error={formValues.details.error}
           className={classes.field}
           color="secondary"
           label="Details"
@@ -73,7 +102,7 @@ export default function Create() {
           required
           name="details"
         />
-        
+
         <Button
           type="submit"
           color="secondary"
