@@ -1,7 +1,8 @@
-import { Container, Drawer, makeStyles, Typography, List, ListItem, ListItemIcon, ListItemText, MenuItem, AppBar, Toolbar } from "@material-ui/core";
+import { Container, Drawer, makeStyles, Typography, List, ListItem, ListItemIcon, ListItemText, MenuItem, AppBar, Toolbar, Avatar } from "@material-ui/core";
 import { AddCircleOutlined, SubjectOutlined } from "@material-ui/icons";
-import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router";
+import React, { useState } from "react";
+import {format} from "date-fns";
 
 const drawerWidth = 240;
 
@@ -27,7 +28,13 @@ const useStyles = makeStyles((theme) => {
         appBar:{
             width:`calc(100% - ${drawerWidth}px)`
         },
-        toolBar: theme.mixins.toolbar
+        toolBar: theme.mixins.toolbar,
+        date:{
+            flexGrow:1
+        },
+        avatar:{
+            marginLeft:theme.spacing(2)
+        }
     }
 })
 
@@ -45,9 +52,13 @@ export default function Layout ({children}) {
         <div className={classes.root} >
             <AppBar elevation={0} className={classes.appBar} >
                 <Toolbar>
-                    <Typography>
-                        {Date().toString()}
+                    <Typography className={classes.date} >
+                        Today is the {format(new Date(), 'do MMMM Y')}
                     </Typography>
+                    <Typography>
+                        Mario
+                    </Typography>
+                    <Avatar src="/google-image.png" className={classes.avatar} />
                 </Toolbar>
             </AppBar>
 
