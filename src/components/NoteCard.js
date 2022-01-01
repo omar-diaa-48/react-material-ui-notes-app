@@ -1,12 +1,13 @@
-import { Card, CardContent, CardHeader, IconButton, Typography } from "@material-ui/core"
+import { Card, CardContent, CardHeader, IconButton, Typography, makeStyles } from "@material-ui/core"
 import { DeleteOutlined } from "@material-ui/icons"
 import React from "react"
 
 
 export default function NoteCard({ note, handleDelete }){
+
     return (
         <div>
-            <Card>
+            <Card elevation={3}>
                 <CardHeader 
                     action={
                         <IconButton onClick={() => handleDelete(note.id)} >
