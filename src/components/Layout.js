@@ -1,4 +1,4 @@
-import { Container, Drawer, makeStyles, Typography, List, ListItem, ListItemIcon, ListItemText, MenuItem } from "@material-ui/core";
+import { Container, Drawer, makeStyles, Typography, List, ListItem, ListItemIcon, ListItemText, MenuItem, AppBar, Toolbar } from "@material-ui/core";
 import { AddCircleOutlined, SubjectOutlined } from "@material-ui/icons";
 import React, { useState } from "react";
 import { useHistory, useLocation } from "react-router";
@@ -23,7 +23,11 @@ const useStyles = makeStyles((theme) => {
         },
         active:{
             background:'#f4f4f4'
-        }
+        },
+        appBar:{
+            width:`calc(100% - ${drawerWidth}px)`
+        },
+        toolBar: theme.mixins.toolbar
     }
 })
 
@@ -39,6 +43,15 @@ export default function Layout ({children}) {
     
     return (
         <div className={classes.root} >
+            <AppBar elevation={0} className={classes.appBar} >
+                <Toolbar>
+                    <Typography>
+                        {Date().toString()}
+                    </Typography>
+                </Toolbar>
+            </AppBar>
+
+
             <Drawer
                 className={classes.drawer}
                 variant="permanent"
@@ -75,6 +88,7 @@ export default function Layout ({children}) {
             </Drawer>
 
             <div className={classes.page} >
+                <div className={classes.toolBar} ></div>
                 <Container>
                     {children}
                 </Container>
