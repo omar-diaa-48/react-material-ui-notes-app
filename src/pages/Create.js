@@ -77,7 +77,7 @@ export default function Create() {
   }
 
   return (
-    <Container>
+    <div>
       <Typography
         variant="h6"
         color="textSecondary"
@@ -136,6 +136,6 @@ export default function Create() {
         </Button>
       </form>
 
-    </Container>
+    </div>
   )
 }
