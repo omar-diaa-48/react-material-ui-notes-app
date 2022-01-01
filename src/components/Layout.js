@@ -4,7 +4,7 @@ import { useHistory, useLocation } from "react-router";
 import React, { useState } from "react";
 import {format} from "date-fns";
 
-const drawerWidth = 240;
+const drawerWidth = 360;
 
 const useStyles = makeStyles((theme) => {
     return {
